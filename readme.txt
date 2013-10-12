@@ -1,4 +1,9 @@
-primeiro teste!   
+git commit -am 'comentario'
+git push -u origin master
 
+Antes de começar: git pull
 
-segundo   aaa
+No fim:
+git add *
+git commit -am 'comentario'
+git push -u origin master
