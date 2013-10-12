@@ -6,4 +6,4 @@ Antes de começar: git pull
 No fim:
 git add *
 git commit -am 'comentario'
-git push -u origin master
+git push -u origin master 
