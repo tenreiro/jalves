@@ -1098,6 +1098,20 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
   float: right;
   margin-top:70px;
   height: 35px;
+}
+#prototipo{
+font-family: 'Droid Sans';
+font-size: 40px;
+line-height: 50px;
+text-align: center;
+font-weight: bold;
+margin: 20px 0px;
+}
+
+#copyright{
+font-family: 'Titillium Web';
+font-size: 12px;
+line-height: 18px;
 
 }
 
