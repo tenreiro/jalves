@@ -1,4 +1,4 @@
 # Ignore configuration files that may contain sensitive information.
-
+.htaccess
 
 # Ignore paths that contain user-generated content.
