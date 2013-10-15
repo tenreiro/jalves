@@ -216,8 +216,8 @@ $databases = array (
     'default' => 
     array (
       'database' => 'jalves_jalves',
-      'username' => 'root',
-      'password' => 'insegura',
+      'username' => 'admin',
+      'password' => 'admin',
       'host' => 'localhost',
       'port' => '',
       'driver' => 'mysql',
