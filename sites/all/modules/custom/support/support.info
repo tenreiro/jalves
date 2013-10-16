@@ -1,0 +1,7 @@
+name = Suporte JAlves
+description = Codigo Apoio Funcionalidades Personalizadas.
+package = JAlves Custom
+core = 7.x
+
+
+scripts[] = js/support.js

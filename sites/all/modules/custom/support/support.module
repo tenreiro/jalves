@@ -1,0 +1,46 @@
+<?php 
+
+function support_simulador(){
+    $formulario = drupal_get_form('support_simulador_form');
+//dsm(render($formulario));
+    print render($formulario);
+}
+
+   
+function support_simulador_form(){
+    $form['ano'] = array(
+           '#type' => 'select',
+           '#title' => 'Ano',
+           '#options' => array(
+                0 => '---',
+                1 => 'Falta calcular os anos'
+            ),
+           '#default_value' => 2,
+            '#ajax' => array(
+            'callback' => 'support_simulador_select',
+            'wrapper' => 'replace_textfield_div',
+            )
+    );
+    $form['marca'] = array(
+           '#type' => 'select',
+           '#title' => 'marca',
+           '#options' => array(
+                0 => ' --- '
+            ),
+           '#default_value' => 0,
+           '#prefix' => '<div id="replace_textfield_div">',
+            '#suffix' => '</div>',
+    );
+    $form['submit'] = array('#type' => 'submit', '#value' => 'Simular ›');
+      
+
+   return $form;
+}
+
+function support_simulador_select($form, $form_state){
+    
+
+    $form['marca']['#options'] = array(0 => 'Falta calcular as marcas');
+    return $form['marca'];
+
+}
