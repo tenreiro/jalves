@@ -90,11 +90,11 @@ body {
 }
 a {
   text-decoration: none;
-  color: #47c0c0;
+  color: #D7181E;
 }
 a:hover {
   text-decoration: none;
-  color: #2e8484;
+  color: #a52a2a	;
 }
 p { margin: 0 0 1em }
 strong { font-weight: 700 }
@@ -202,7 +202,7 @@ abbr, acronym {
   cursor: help;
 }
 mark, ins {
-  background: #fff9c0;
+  background: #bf8e60;
   text-decoration: none;
 }
 sup,
@@ -493,7 +493,7 @@ body.sidebar-first #content {
   text-decoration: none;
 }
 #footer a:hover{
-  color: #3fb7b7;
+  color: #a50b00;
 }
 
 
@@ -904,7 +904,7 @@ ul.inline, ul.links.inline {
 
 .field-name-field-tags a{
   -moz-transition: opacity 0.2s ease-in-out 0s;
-  background: none repeat scroll 0 0 #3FB7B7;
+  background: none repeat scroll 0 0 #a50b00;
   color: #FFFFFF !important;
   line-height: 1em !important;
   margin-bottom: 3px;
@@ -1115,3 +1115,22 @@ line-height: 18px;
 
 }
 
+#support-simulador-form{
+padding: 20px 0px 20px 20px;
+border-top:5px solid #808080;
+color: #808080;
+text-align: center;
+}
+
+#edit-submit{
+    background:url(images/arrow.png) no-repeat;
+    cursor:pointer;
+    width: 64px;
+    height: 64px;
+    border: none;
+	float:right;
+}
+
+#footer-wrap{
+border-top:5px solid #808080;
+}

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/jalves/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<<<<<<< HEAD
 <url><loc>http://localhost/jalves/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+=======
+<url><loc>http://localhost:8080/jalves/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+>>>>>>> 43ebe1e30927c777c6e2a15e991a6ca30030d04f
 </urlset>
