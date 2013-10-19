@@ -1,63 +1,89 @@
 <?php 
 
 function support_simulador(){
-    $formulario = drupal_get_form('support_simulador_form');
-    print render($formulario);
+      if(isset($_POST['cilindrada'])){
+        dsm($_POST);
+        print('Falta formulário com os componentes!');
+      }else{
+        $formulario = drupal_get_form('support_simulador_form');
+        print render($formulario);
+      }
+   
 }
 
    
 function support_simulador_form(){
 
-    //calcular o ano minimo de todos os modelos
-   taxonomy_get_tree(4);
 
+  //TO-DO  limpar select de nivel inferior quando se muda o nivel superior
+  //quando ja selecionei a cilindrada e se mudar a marca do carro o modelo "limpa" e a cilindrada não... o mesmo com o ano.
 
+  //calcular o ano minimo de todos os modelos
+  $min = 2000;
+   $cilindrada = taxonomy_get_tree(4);
+   foreach ($cilindrada as $key => $value) {
+    $value = taxonomy_term_load($value->tid);
+    if(isset($value->field_ano[LANGUAGE_NONE][0]['value']) && (intval($value->field_ano[LANGUAGE_NONE][0]['value']) < $min)){
+      $min = $value->field_ano[LANGUAGE_NONE][0]['value'];
+    }
+   }
+    $anos = range ( date('Y'), $min, -1 );
+    $anos[0] = 'Ano';
     $form['ano'] = array(
            '#type' => 'select',
+           '#validated' => TRUE,
            '#title' => 'Ano',
-           '#options' => array(
-                0 => '---',
-                1 => 'Falta calcular os anos'
-            ),
-           '#default_value' => 2,
+           '#options' => $anos,
+           '#default_value' => 0,
             '#ajax' => array(
-            'callback' => 'support_simulador_select',
-            'wrapper' => 'replace_textfield_div',
+            'callback' => '_support_simulador_select_marca',
+            'wrapper' => 'select_marca',
             )
     );
     $form['marca'] = array(
            '#type' => 'select',
+           '#validated' => TRUE,
            '#title' => 'Marca',
            '#options' => array(
                 0 => ' --- '
             ),
            '#default_value' => 0,
-           '#prefix' => '<div id="replace_textfield_div">',
+           '#prefix' => '<div id="select_marca">',
             '#suffix' => '</div>',
+             '#ajax' => array(
+            'callback' => '_support_simulador_select_modelo',
+            'wrapper' => 'select_modelo',
+            )
     );
 	$form['modelo'] = array(
            '#type' => 'select',
+           '#validated' => TRUE,
            '#title' => 'Modelo',
            '#options' => array(
                 0 => ' --- '
             ),
            '#default_value' => 0,
-           '#prefix' => '<div id="replace_textfield_div">',
+           '#prefix' => '<div id="select_modelo">',
             '#suffix' => '</div>',
+            '#ajax' => array(
+            'callback' => '_support_simulador_select_cilindrada',
+            'wrapper' => 'select_cilindrada',
+            )
     );
 	    $form['cilindrada'] = array(
            '#type' => 'select',
+           '#validated' => TRUE,
            '#title' => 'Cilindrada',
            '#options' => array(
                 0 => ' --- '
             ),
            '#default_value' => 0,
-           '#prefix' => '<div id="replace_textfield_div">',
+           '#prefix' => '<div id="select_cilindrada">',
             '#suffix' => '</div>',
     );
     $form['submit'] = array(
-	'#type' => 'submit', 
-	'#value' => '',
+	 '#type' => 'submit', 
+	 '#value' => '',
     '#prefix' => '<div id="submit_simul_div">',
     '#suffix' => '</div>',
 	);
@@ -66,10 +92,99 @@ function support_simulador_form(){
    return $form;
 }
 
-function support_simulador_select($form, $form_state){
-    
-
-    $form['marca']['#options'] = array(0 => 'Falta calcular as marcas');
+function _support_simulador_select_marca($form, $form_state){
+  $ano = $form_state['values']['ano'];
+  if($ano){
+    $ano = date('Y') - $ano;
+    $marcas = _support_marcasPorAno($ano);
+    $marcas[0] = 'Marca';
+    ksort($marcas);
+    $form['marca']['#options'] = $marcas;
+    $form['marca']['#default_value'] = 0;
     return $form['marca'];
+  }
+  $form['marca']['#options'] = array(
+                0 => ' --- '
+            );
+  return $form['marca'];
+}
 
+
+function _support_marcasPorAno($ano){
+  $array_return = $array_return_treated = array();
+  $taxonomy = taxonomy_get_tree(4);
+  foreach ($taxonomy as $key => $value) {
+    $parent = $value->parents[0];
+    $value = taxonomy_term_load($value->tid);
+    if(isset($value->field_ano[LANGUAGE_NONE][0]['value']) && (intval($value->field_ano[LANGUAGE_NONE][0]['value']) <= $ano)){
+      $array_return[$parent] = $parent;
+    }
+  }
+  foreach ($array_return as $key => $value) {
+    $marca = taxonomy_term_load($value);
+    $array_return_treated[$value] = $marca->name;
+  }
+  return $array_return_treated;
+}
+
+
+function _support_simulador_select_modelo($form, $form_state){
+  $ano = $form_state['values']['ano'];
+  $marca = $form_state['values']['marca'];
+  if($ano && $marca){
+    $ano = date('Y') - $ano;
+    $modelos = _support_modelosPorMarcaAno($marca,$ano);
+    $modelos[0] = 'Modelo';
+    ksort($modelos);
+    $form['modelo']['#options'] = $modelos;
+    $form['modelo']['#default_value'] = 0;
+    return $form['modelo'];
+  }
+  $form['modelo']['#options'] = array(
+                0 => ' --- '
+            );
+  return $form['modelo'];
+}
+
+function _support_modelosPorMarcaAno($marca,$ano){
+  $array_return = $array_return_treated = array();
+  $taxonomy = taxonomy_get_tree(4,$marca);
+  foreach ($taxonomy as $key => $value) {
+    $value = taxonomy_term_load($value->tid);
+    if(isset($value->field_ano[LANGUAGE_NONE][0]['value']) && (intval($value->field_ano[LANGUAGE_NONE][0]['value']) <= $ano)){
+      $array_return[$value->tid] = $value->name;
+    }
+  }
+  
+  return $array_return;
+}
+
+function _support_simulador_select_cilindrada($form, $form_state){
+  $modelo = $form_state['values']['modelo'];
+  if($modelo){
+    $cilindrada = _support_cilindradaPorModelo($modelo);
+    $cilindrada[0] = 'Cilindrada';
+    ksort($cilindrada);
+    $form['cilindrada']['#options'] = $cilindrada;
+    $form['cilindrada']['#default_value'] = 0;
+    return $form['cilindrada'];
+  }
+  $form['cilindrada']['#options'] = array(
+                0 => ' --- '
+            );
+  return $form['cilindrada'];
+}
+
+function _support_cilindradaPorModelo($modelo){
+  $array_return = $array_return_treated = array();
+  $taxonomy = taxonomy_get_tree(5);
+  foreach ($taxonomy as $key => $value) {
+    $value = taxonomy_term_load($value->tid);
+    foreach ($value->field_modelo[LANGUAGE_NONE] as $key2 => $value2) {
+      if($value2['tid'] == $modelo)
+        $array_return[$value->tid] = $value->name;
+    }
+  }
+  
+  return $array_return;
 }
