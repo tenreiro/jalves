@@ -1090,15 +1090,18 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 .selector{
   display: none;
 }
+
 #header{
   background: url(images/header.png) no-repeat;
   height: 135px;
 }
+
 #main-menu{
   float: right;
   margin-top:70px;
   height: 35px;
 }
+
 #prototipo{
 font-family: 'Droid Sans';
 font-size: 40px;
@@ -1116,19 +1119,22 @@ line-height: 18px;
 }
 
 #support-simulador-form{
-padding: 20px 0px 20px 20px;
+padding: 0px 38% 0px 38%;
 border-top:5px solid #808080;
 color: #808080;
-text-align: center;
 }
 
-#edit-submit{
-    background:url(images/arrow.png) no-repeat;
-    cursor:pointer;
-    width: 64px;
-    height: 64px;
-    border: none;
-	float:right;
+#submit_simul_div
+{
+text-align: right;
+}
+
+#submit_simul_div #edit-submit{
+background:url(images/simul.png) no-repeat;
+cursor:pointer;
+width: 41px;
+height: 64px;
+border: none;
 }
 
 #footer-wrap{
