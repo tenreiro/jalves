@@ -2,12 +2,16 @@
 
 function support_simulador(){
     $formulario = drupal_get_form('support_simulador_form');
-//dsm(render($formulario));
     print render($formulario);
 }
 
    
 function support_simulador_form(){
+
+    //calcular o ano minimo de todos os modelos
+   taxonomy_get_tree(4);
+
+
     $form['ano'] = array(
            '#type' => 'select',
            '#title' => 'Ano',
