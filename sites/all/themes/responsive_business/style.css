@@ -1120,7 +1120,6 @@ line-height: 18px;
 
 #support-simulador-form{
 padding: 0px 38% 0px 38%;
-border-top:5px solid #808080;
 color: #808080;
 }
 
@@ -1137,6 +1136,15 @@ height: 64px;
 border: none;
 }
 
+#prototipo{
+border-bottom:5px solid #808080;
+color: black;
+}
+
 #footer-wrap{
 border-top:5px solid #808080;
+}
+
+.page-title{
+display: none;
 }
