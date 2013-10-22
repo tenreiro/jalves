@@ -484,7 +484,7 @@ body.sidebar-first #content {
   font-size: 14px;
   font-weight: bold;
 }
-
+/* -------------- footer Elements  ------------- */
 #footer{
 }
 
@@ -499,11 +499,10 @@ body.sidebar-first #content {
 
 #footer-bottom{
   padding: 10px 0;
+  text-align: center;
 }
 
 #copyright {
-  float: left;
-  width: 70%;
   font-size: 10px;
   color:#666;
 }
@@ -1119,14 +1118,14 @@ line-height: 18px;
 }
 
 #support-simulador-form{
-padding: 0px 0px 0px 40%;
+padding: 0px 0px 0px 38%;
 color: #808080;
 }
 
 #submit_simul_div
 {
 position: absolute;
-right:30%;
+right:38%;
 top:50%;
 }
 
@@ -1141,6 +1140,7 @@ border: none;
 #prototipo{
 border-bottom:5px solid #808080;
 color: black;
+font-family:Arial,Helvetica,sans-serif;
 }
 
 #footer-wrap{
@@ -1149,4 +1149,14 @@ border-top:5px solid #808080;
 
 .page-title{
 display: none;
+}
+
+#sobrenos{
+text-align:justify;
+text-justify:inter-word;
+}
+
+#sobrenos p{
+font-family:"Times New Roman",Georgia,Serif;
+font-size:140%;
 }
