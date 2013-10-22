@@ -1160,3 +1160,7 @@ text-justify:inter-word;
 font-family:"Times New Roman",Georgia,Serif;
 font-size:140%;
 }
+
+.panel-pane.pane-views.pane-galeriainicial{
+margin: 10px 21% 10px 21%;
+}
