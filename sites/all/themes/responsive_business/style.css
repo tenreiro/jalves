@@ -1119,13 +1119,15 @@ line-height: 18px;
 }
 
 #support-simulador-form{
-padding: 0px 38% 0px 38%;
+padding: 0px 0px 0px 40%;
 color: #808080;
 }
 
 #submit_simul_div
 {
-text-align: right;
+position: absolute;
+right:30%;
+top:50%;
 }
 
 #submit_simul_div #edit-submit{
