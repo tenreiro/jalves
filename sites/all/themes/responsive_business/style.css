@@ -1090,9 +1090,14 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
   display: none;
 }
 
+/*principal*/
 #header{
   background: url(images/header.png) no-repeat;
   height: 135px;
+}
+
+.page-title{
+display: none;
 }
 
 #main-menu{
@@ -1102,30 +1107,36 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
 }
 
 #prototipo{
-font-family: 'Droid Sans';
 font-size: 40px;
 line-height: 50px;
 text-align: center;
 font-weight: bold;
 margin: 20px 0px;
+border-bottom:5px solid #808080;
+color: black;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+#footer-wrap{
+border-top:5px solid #808080;
 }
 
 #copyright{
 font-family: 'Titillium Web';
 font-size: 12px;
 line-height: 18px;
-
 }
 
-#support-simulador-form{
-padding: 0px 0px 0px 38%;
+/*formulario simulador*/
+#formulario_simulador{
+padding: 0px 0px 0px 35%;
 color: #808080;
 }
 
 #submit_simul_div
 {
 position: absolute;
-right:38%;
+right:35%;
 top:50%;
 }
 
@@ -1137,20 +1148,8 @@ height: 64px;
 border: none;
 }
 
-#prototipo{
-border-bottom:5px solid #808080;
-color: black;
-font-family:Arial,Helvetica,sans-serif;
-}
 
-#footer-wrap{
-border-top:5px solid #808080;
-}
-
-.page-title{
-display: none;
-}
-
+/*pagina home/sobre nós*/
 #sobrenos{
 text-align:justify;
 text-justify:inter-word;
@@ -1161,6 +1160,19 @@ font-family:"Times New Roman",Georgia,Serif;
 font-size:140%;
 }
 
+/*Galeria inicial*/
 .panel-pane.pane-views.pane-galeriainicial{
 margin: 10px 21% 10px 21%;
+}
+
+/* view contactos*/
+.views-field.views-field-title{
+font-size:140%;
+}
+#views_slideshow_cycle_main_oficinas-block{
+margin: 10px 0px 10px 0px;
+}
+.panel-pane.pane-views.pane-oficinas{
+margin: 10px 21% 10px 21%;
+text-align: center;
 }
