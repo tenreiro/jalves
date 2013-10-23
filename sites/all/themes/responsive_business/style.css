@@ -1129,7 +1129,7 @@ right:38%;
 top:50%;
 }
 
-#submit_simul_div #edit-submit{
+#submit_simul_div .form-submit{
 background:url(images/simul.png) no-repeat;
 cursor:pointer;
 width: 41px;

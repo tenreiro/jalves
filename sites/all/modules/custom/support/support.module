@@ -1,19 +1,24 @@
 <?php 
 
 function support_simulador(){
-      if(isset($_POST['cilindrada'])){
-        dsm($_POST);
-        print('Falta formulário com os componentes!');
-      }else{
-        $formulario = drupal_get_form('support_simulador_form');
-        print render($formulario);
-      }
-   
+
+  if($_POST['cilindrada'] && $_POST['marca']&& $_POST['modelo']&& $_POST['ano']){
+_support_simulador_componentes();
+  }else{
+    $formulario = drupal_get_form('support_simulador_formulario');
+  }
+  print render($formulario);
+  
 }
 
-   
-function support_simulador_form(){
-
+function _support_simulador_componentes(){
+  $cilindrada = $_POST['cilindrada'];
+  $modelo = $_POST['modelo'];
+  $marca = $_POST['marca'];
+  $ano = $_POST['ano'];
+  print 'ANO:'.$ano.' MARCA:'.$marca.' MODELO:'.$modelo.' CILINDRADA:'.$cilindrada;
+}
+function support_simulador_formulario(){
 
   //TO-DO  limpar select de nivel inferior quando se muda o nivel superior
   //quando ja selecionei a cilindrada e se mudar a marca do carro o modelo "limpa" e a cilindrada não... o mesmo com o ano.
@@ -29,11 +34,16 @@ function support_simulador_form(){
    }
     $anos = range ( date('Y'), $min, -1 );
     $anos[0] = 'Ano';
+    $form['#prefix'] = '<div id="formulario_simulador">';
+    $form['#suffix'] = '</div>';
     $form['ano'] = array(
+      '#prefix' => '<div id="select_ano">',
+            '#suffix' => '</div>',
            '#type' => 'select',
            '#validated' => TRUE,
            '#title' => 'Ano',
            '#options' => $anos,
+           '#required' => TRUE,
            '#default_value' => 0,
             '#ajax' => array(
             'callback' => '_support_simulador_select_marca',
@@ -43,6 +53,7 @@ function support_simulador_form(){
     $form['marca'] = array(
            '#type' => 'select',
            '#validated' => TRUE,
+           '#required' => TRUE,
            '#title' => 'Marca',
            '#options' => array(
                 0 => ' --- '
@@ -58,6 +69,7 @@ function support_simulador_form(){
 	$form['modelo'] = array(
            '#type' => 'select',
            '#validated' => TRUE,
+           '#required' => TRUE,
            '#title' => 'Modelo',
            '#options' => array(
                 0 => ' --- '
@@ -72,6 +84,7 @@ function support_simulador_form(){
     );
 	    $form['cilindrada'] = array(
            '#type' => 'select',
+           '#required' => TRUE,
            '#validated' => TRUE,
            '#title' => 'Cilindrada',
            '#options' => array(
@@ -86,13 +99,41 @@ function support_simulador_form(){
 	 '#value' => '',
     '#prefix' => '<div id="submit_simul_div">',
     '#suffix' => '</div>',
+     '#ajax' => array(
+      'callback' => 'support_simulador_formulario_callback',
+      'wrapper' => 'support-simulador-formulario'
+    )
 	);
-      
 
+   // $form['#validate'][] = 'support_simulador_formulario_validate';
+      
+  
    return $form;
 }
 
+
+function support_simulador_formulario_callback($form, &$form_state) {
+ $commands = array();
+ $commands[] = ajax_command_remove('.simulador_validate'); 
+ if($form_state['values']['ano'] && $form_state['values']['marca'] && $form_state['values']['modelo'] && $form_state['values']['cilindrada']){
+    
+    $commands[] = ajax_command_invoke('#support-simulador-formulario', 'submit');
+    return array('#type' => 'ajax', '#commands' => $commands);
+ }
+  if(!$form_state['values']['ano'])
+    $commands[] = ajax_command_after('#select_ano', '<div class="simulador_validate">Obrigatorio</div>');
+  if(!$form_state['values']['marca'])
+    $commands[] = ajax_command_after('#select_marca', '<div class="simulador_validate">Obrigatorio</div>');
+  if(!$form_state['values']['modelo'])
+    $commands[] = ajax_command_after('#select_modelo', '<div class="simulador_validate">Obrigatorio</div>');
+  if(!$form_state['values']['cilindrada'])
+    $commands[] = ajax_command_after('#select_cilindrada', '<div class="simulador_validate">Obrigatorio</div>');
+ return array('#type' => 'ajax', '#commands' => $commands);
+}
+
 function _support_simulador_select_marca($form, $form_state){
+  $commands = array();
+  $commands[] = ajax_command_remove('.simulador_validate'); 
   $ano = $form_state['values']['ano'];
   if($ano){
     $ano = date('Y') - $ano;
@@ -100,13 +141,31 @@ function _support_simulador_select_marca($form, $form_state){
     $marcas[0] = 'Marca';
     ksort($marcas);
     $form['marca']['#options'] = $marcas;
-    $form['marca']['#default_value'] = 0;
-    return $form['marca'];
+    $form['marca']['#value'] = 0;
+    $form['modelo']['#options'] = array(
+                0 => ' --- '
+            );
+    $form['cilindrada']['#options'] = array(
+                0 => ' --- '
+            );
+    $commands[] = ajax_command_replace('#select_marca', drupal_render($form['marca']));
+    $commands[] = ajax_command_replace('#select_modelo', drupal_render($form['modelo']));
+    $commands[] = ajax_command_replace('#select_cilindrada', drupal_render($form['cilindrada']));
+    return array('#type' => 'ajax', '#commands' => $commands);
   }
   $form['marca']['#options'] = array(
                 0 => ' --- '
             );
-  return $form['marca'];
+  $form['modelo']['#options'] = array(
+                0 => ' --- '
+            );
+  $form['cilindrada']['#options'] = array(
+                0 => ' --- '
+            );
+  $commands[] = ajax_command_replace('#select_marca', drupal_render($form['marca']));
+  $commands[] = ajax_command_replace('#select_modelo', drupal_render($form['modelo']));
+  $commands[] = ajax_command_replace('#select_cilindrada', drupal_render($form['cilindrada']));
+  return array('#type' => 'ajax', '#commands' => $commands);
 }
 
 
@@ -129,6 +188,8 @@ function _support_marcasPorAno($ano){
 
 
 function _support_simulador_select_modelo($form, $form_state){
+  $commands = array();
+  $commands[] = ajax_command_remove('.simulador_validate'); 
   $ano = $form_state['values']['ano'];
   $marca = $form_state['values']['marca'];
   if($ano && $marca){
@@ -137,13 +198,23 @@ function _support_simulador_select_modelo($form, $form_state){
     $modelos[0] = 'Modelo';
     ksort($modelos);
     $form['modelo']['#options'] = $modelos;
-    $form['modelo']['#default_value'] = 0;
-    return $form['modelo'];
+    $form['modelo']['#value'] = 0;
+    $form['cilindrada']['#options'] = array(
+                0 => ' --- '
+            );
+    $commands[] = ajax_command_replace('#select_modelo', drupal_render($form['modelo']));
+    $commands[] = ajax_command_replace('#select_cilindrada', drupal_render($form['cilindrada']));
+    return array('#type' => 'ajax', '#commands' => $commands);
   }
   $form['modelo']['#options'] = array(
                 0 => ' --- '
             );
-  return $form['modelo'];
+  $form['cilindrada']['#options'] = array(
+                0 => ' --- '
+            );
+  $commands[] = ajax_command_replace('#select_modelo', drupal_render($form['modelo']));
+  $commands[] = ajax_command_replace('#select_cilindrada', drupal_render($form['cilindrada']));
+  return array('#type' => 'ajax', '#commands' => $commands);
 }
 
 function _support_modelosPorMarcaAno($marca,$ano){
@@ -160,19 +231,23 @@ function _support_modelosPorMarcaAno($marca,$ano){
 }
 
 function _support_simulador_select_cilindrada($form, $form_state){
+  $commands = array();
+  $commands[] = ajax_command_remove('.simulador_validate'); 
   $modelo = $form_state['values']['modelo'];
   if($modelo){
     $cilindrada = _support_cilindradaPorModelo($modelo);
     $cilindrada[0] = 'Cilindrada';
     ksort($cilindrada);
     $form['cilindrada']['#options'] = $cilindrada;
-    $form['cilindrada']['#default_value'] = 0;
-    return $form['cilindrada'];
+    $form['cilindrada']['#value'] = 0;
+    $commands[] = ajax_command_replace('#select_cilindrada', drupal_render($form['cilindrada']));
+    return array('#type' => 'ajax', '#commands' => $commands);
   }
   $form['cilindrada']['#options'] = array(
                 0 => ' --- '
             );
-  return $form['cilindrada'];
+  $commands[] = ajax_command_replace('#select_cilindrada', drupal_render($form['cilindrada']));
+    return array('#type' => 'ajax', '#commands' => $commands);
 }
 
 function _support_cilindradaPorModelo($modelo){
