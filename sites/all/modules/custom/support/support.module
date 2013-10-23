@@ -111,14 +111,16 @@ function support_simulador_formulario_callback($form, &$form_state) {
     return array('#type' => 'ajax', '#commands' => $commands);
   }
 
+  $msg = '<div class="simulador_validate">Campo obrigatório</div>';
+
   if(!$form_state['values']['ano'])
-    $commands[] = ajax_command_after('#select_ano', '<div class="simulador_validate">Obrigatorio</div>');
+    $commands[] = ajax_command_after('#select_ano', $msg);
   if(!$form_state['values']['marca'])
-    $commands[] = ajax_command_after('#select_marca', '<div class="simulador_validate">Obrigatorio</div>');
+    $commands[] = ajax_command_after('#select_marca', $msg);
   if(!$form_state['values']['modelo'])
-    $commands[] = ajax_command_after('#select_modelo', '<div class="simulador_validate">Obrigatorio</div>');
+    $commands[] = ajax_command_after('#select_modelo', $msg);
   if(!$form_state['values']['cilindrada'])
-    $commands[] = ajax_command_after('#select_cilindrada', '<div class="simulador_validate">Obrigatorio</div>');
+    $commands[] = ajax_command_after('#select_cilindrada', $msg);
  return array('#type' => 'ajax', '#commands' => $commands);
 }
 
@@ -225,8 +227,14 @@ function _support_modelosPorMarcaAno($marca,$ano){
 }
 function _support_cilindradaPorModelo($modelo){
   $array_return = $array_return_treated = array();
-  $taxonomy = taxonomy_get_tree(5);
+  $taxonomy = taxonomy_get_tree(4,$modelo);
   foreach ($taxonomy as $key => $value) {
+    $value = taxonomy_term_load($value->tid);
+    if(isset($value->field_ano[LANGUAGE_NONE][0]['value']) && (intval($value->field_ano[LANGUAGE_NONE][0]['value']) <= $ano)){
+      $array_return[$value->tid] = $value->name;
+    }elseif(!isset($value->field_ano[LANGUAGE_NONE][0]['value'])){
+      $array_return[$value->tid] = $value->name;
+    }
     $value = taxonomy_term_load($value->tid);
     foreach ($value->field_modelo[LANGUAGE_NONE] as $key2 => $value2) {
       if($value2['tid'] == $modelo)
