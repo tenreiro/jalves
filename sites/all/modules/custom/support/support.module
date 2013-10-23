@@ -149,6 +149,7 @@ function _support_simulador_select_marca($form, $form_state){
   $commands[] = ajax_command_replace('#select_cilindrada', drupal_render($form['cilindrada']));
   return array('#type' => 'ajax', '#commands' => $commands);
 }
+
 function _support_simulador_select_modelo($form, $form_state){
   $commands = array();
   $commands[] = ajax_command_remove('.simulador_validate'); 
@@ -173,6 +174,7 @@ function _support_simulador_select_modelo($form, $form_state){
   $commands[] = ajax_command_replace('#select_cilindrada', drupal_render($form['cilindrada']));
   return array('#type' => 'ajax', '#commands' => $commands);
 }
+
 function _support_simulador_select_cilindrada($form, $form_state){
   $commands = array();
   $commands[] = ajax_command_remove('.simulador_validate'); 
