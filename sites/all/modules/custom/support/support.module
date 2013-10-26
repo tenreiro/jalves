@@ -14,6 +14,11 @@ function _support_simulador_componentes(){
   $modelo = $_POST['modelo'];
   $marca = $_POST['marca'];
   $ano = $_POST['ano'];
+
+
+  //listar todos os componentes compativeis com os dados como selects
+  
+
   print 'ANO:'.$ano.' MARCA:'.$marca.' MODELO:'.$modelo.' CILINDRADA:'.$cilindrada;
 }
 
@@ -201,10 +206,12 @@ function _support_marcasPorAno($ano){
   $array_return = $array_return_treated = array();
   $taxonomy = taxonomy_get_tree(4);
   foreach ($taxonomy as $key => $value) {
-    $parent = $value->parents[0];
-    $value = taxonomy_term_load($value->tid);
-    if(isset($value->field_ano[LANGUAGE_NONE][0]['value']) && (intval($value->field_ano[LANGUAGE_NONE][0]['value']) <= $ano)){
-      $array_return[$parent] = $parent;
+    if($value->depth == 1){
+      $parent = $value->parents[0];
+      $value_loaded = taxonomy_term_load($value->tid);
+      if(isset($value_loaded->field_ano[LANGUAGE_NONE][0]['value']) && (intval($value_loaded->field_ano[LANGUAGE_NONE][0]['value']) <= $ano)){
+        $array_return[$parent] = $parent;
+      }
     }
   }
   foreach ($array_return as $key => $value) {
