@@ -15,8 +15,11 @@ function _support_simulador_componentes(){
   $marca = $_POST['marca'];
   $ano = $_POST['ano'];
 
+  $ano = date('Y') - $ano+1;
+  //criar o tipo de conteudo orçamento e depois filtrar os componentes da listagem de entity reference
+  
 
-  //listar todos os componentes compativeis com os dados como selects
+  
   
 
   print 'ANO:'.$ano.' MARCA:'.$marca.' MODELO:'.$modelo.' CILINDRADA:'.$cilindrada;
@@ -32,7 +35,7 @@ function support_simulador_formulario(){
         $min = $value->field_ano[LANGUAGE_NONE][0]['value'];
       }
     }
-    $anos = range ( date('Y'), $min, -1 );
+    $anos = range ( date('Y')+1, $min, -1);
     $anos[0] = 'Ano';
     $form['#prefix'] = '<div id="formulario_simulador">';
     $form['#suffix'] = '</div>';

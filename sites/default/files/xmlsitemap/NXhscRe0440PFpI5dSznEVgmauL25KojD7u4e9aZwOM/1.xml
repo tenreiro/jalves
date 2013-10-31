@@ -2,6 +2,6 @@
 <?xml-stylesheet type="text/xsl" href="/~pedrotenreiro/jalves/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>http://pedro.local/~pedrotenreiro/jalves/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
-<url><loc>http://pedro.local/~pedrotenreiro/jalves/content/oleo</loc><lastmod>2013-10-23T21:58Z</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
-<url><loc>http://pedro.local/~pedrotenreiro/jalves/content/filtro-de-oleo</loc><lastmod>2013-10-23T21:59Z</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>http://pedro.local/~pedrotenreiro/jalves/content/oleo</loc><lastmod>2013-10-26T11:10Z</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+<url><loc>http://pedro.local/~pedrotenreiro/jalves/content/filtro-de-oleo</loc><lastmod>2013-10-26T11:10Z</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
 </urlset>
