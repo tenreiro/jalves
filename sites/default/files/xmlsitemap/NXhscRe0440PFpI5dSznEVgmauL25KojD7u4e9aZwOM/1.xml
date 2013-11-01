@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="/~pedrotenreiro/jalves/sitemap.xsl"?>
+<?xml-stylesheet type="text/xsl" href="/jalves/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>http://pedro.local/~pedrotenreiro/jalves/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
-<url><loc>http://pedro.local/~pedrotenreiro/jalves/content/oleo</loc><lastmod>2013-10-23T21:58Z</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
-<url><loc>http://pedro.local/~pedrotenreiro/jalves/content/filtro-de-oleo</loc><lastmod>2013-10-23T21:59Z</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/correia-de-distribui%C3%A7%C3%A3o-b</loc><lastmod>2013-11-01T10:45Z</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/correia-de-distribui%C3%A7%C3%A3o-o</loc><lastmod>2013-11-01T10:46Z</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/filtro-ar-xpto</loc><lastmod>2013-11-01T10:53Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/oleo-b</loc><lastmod>2013-11-01T10:54Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/filtro-habitac</loc><lastmod>2013-11-01T10:55Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/filtro-gasolina</loc><lastmod>2013-11-01T10:58Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/filtro-gasoleo</loc><lastmod>2013-11-01T11:11Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/escape</loc><lastmod>2013-11-01T10:59Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/catalizador</loc><lastmod>2013-11-01T11:07Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/pneu-continental-17</loc><lastmod>2013-11-01T11:00Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/embraiagem-o</loc><lastmod>2013-11-01T11:01Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/calco</loc><lastmod>2013-11-01T11:02Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/disco-b</loc><lastmod>2013-11-01T11:08Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/bateria-o</loc><lastmod>2013-11-01T11:03Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/bateria-otp</loc><lastmod>2013-11-01T11:04Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/bateria-otp-big</loc><lastmod>2013-11-01T11:04Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/vela-g</loc><lastmod>2013-11-01T11:05Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/vela-g2</loc><lastmod>2013-11-01T11:05Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/vela-tudo</loc><lastmod>2013-11-01T11:06Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/luz-frente</loc><lastmod>2013-11-01T11:07Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/luz-marcha-atras</loc><lastmod>2013-11-01T11:09Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/amortecedor-dianteiro-xpto</loc><lastmod>2013-11-01T11:43Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/oleo-o</loc><lastmod>2013-11-01T10:52Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/luz-xanon</loc><lastmod>2013-11-01T11:43Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/filtro-de-oleo</loc><lastmod>2013-11-01T10:52Z</lastmod><changefreq>hourly</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/amortecedor-o</loc><lastmod>2013-11-01T09:52Z</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/amortecedor-b</loc><lastmod>2013-11-01T09:54Z</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/amortecedor-smola-ob</loc><lastmod>2013-11-01T10:43Z</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8080/jalves/content/mola-ob</loc><lastmod>2013-11-01T10:44Z</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
 </urlset>

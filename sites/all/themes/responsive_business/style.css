@@ -1166,21 +1166,37 @@ margin: 10px 21% 10px 21%;
 }
 
 /* view contactos*/
-.views-field.views-field-title{
+.oficinas .views-field.views-field-title{
 font-size:140%;
 }
-#views_slideshow_cycle_main_oficinas-block{
-margin: 10px 0px 10px 0px;
-}
-.panel-pane.pane-views.pane-oficinas{
+.oficinas .view-content{
 margin: 10px 21% 10px 21%;
 text-align: center;
 }
-
-.oficinas .pager{
-
+.oficinas .item-list{
+margin: 10px 0 10px 0;
+}
+.oficinas .pager .pager-current{
+display: none;
 }
 
+.oficinas .pager li{
+background:none;
+display:inline-block;
+}
 
+.oficinas .pager .pager-previous a{
+background:url(images/previous.png) no-repeat;
+cursor:pointer;
+width: 30px;
+height: 30px;
+border: none;
+display:block;}
 
-
+.oficinas .pager .pager-next a{
+background:url(images/next.png) no-repeat;
+cursor:pointer;
+width: 30px;
+height: 30px;
+border: none;
+display:block;}
