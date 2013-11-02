@@ -41,25 +41,25 @@
   padding-bottom: 0;
 }
 
-.panels-flexible-column-4-main {
+.panels-flexible-column-2-main {
   float: left;
   width: 99.0000%;
 }
 
-.panels-flexible-4-inside {
+.panels-flexible-2-inside {
   padding-right: 0px;
 }
 
-.panels-flexible-4 {
+.panels-flexible-2 {
   width: auto;
 }
 
-.panels-flexible-region-4-center {
+.panels-flexible-region-2-center {
   float: left;
   width: 99.0000%;
 }
 
-.panels-flexible-row-4-main-row-inside {
+.panels-flexible-row-2-main-row-inside {
   padding-right: 0px;
 }
 

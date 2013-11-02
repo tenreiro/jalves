@@ -1175,16 +1175,58 @@ text-align: center;
 }
 .oficinas .item-list{
 margin: 10px 0 10px 0;
+text-align: center;
 }
-.oficinas .pager .pager-current{
-display: none;
-}
-
 .oficinas .pager li{
 background:none;
 display:inline-block;
 }
 
+.oficinas .pager .pager-current{
+background:url(images/oficinaB.png) no-repeat;
+cursor:pointer;
+width: 30px;
+height: 30px;
+border: none;
+display:block;
+/* Hide the text. */
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+display:inline-block;
+}
+
+.oficinas .pager .pager-item a{
+background:url(images/oficinaR.png) no-repeat;
+cursor:pointer;
+width: 30px;
+height: 30px;
+border: none;
+display:block;
+/* Hide the text. */
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+}
+.oficinas .pager .pager-previous{
+display: none;
+}
+.oficinas .pager .pager-next{
+display: none;
+}
+.oficinas .pager .pager-last.last{
+display: none;
+}
+.oficinas .pager .pager-first.first{
+display: none;
+}
+/*.oficinas .pager li{
+background:none;
+display:inline-block;
+}
+.oficinas .pager .pager-current{
+display: none;
+}
 .oficinas .pager .pager-previous a{
 background:url(images/previous.png) no-repeat;
 cursor:pointer;
@@ -1199,4 +1241,4 @@ cursor:pointer;
 width: 30px;
 height: 30px;
 border: none;
-display:block;}
+display:block;}*/
