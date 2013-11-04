@@ -1129,18 +1129,15 @@ line-height: 18px;
 
 /*formulario simulador*/
 #formulario_simulador{
-padding: 0px 0px 0px 35%;
+padding: 0px 0px 0px 30%;
 color: #808080;
+position: relative;
 }
 
-#submit_simul_div
-{
-position: absolute;
-top:60%;
-right: 40%;
-}
-.ajax-progress-throbber .message, .ajax-progress-throbber .throbber{
-position: absolute;
+#submit_simul_div{
+position:absolute;
+top: 40%;
+right: 30%;
 }
 
 #submit_simul_div .form-submit{
@@ -1151,6 +1148,10 @@ height: 64px;
 border: none;
 }
 
+/*loading no simulador*/
+.ajax-progress-throbber .message, .ajax-progress-throbber .throbber{
+position: absolute;
+}
 
 /*pagina home/sobre nós*/
 #sobrenos{
@@ -1246,3 +1247,12 @@ width: 30px;
 height: 30px;
 border: none;
 display:block;}*/
+
+/**/
+.form-select{
+width: 200px;
+height: 34px;
+overflow: hidden;
+background: url(images/new_arrow.png) no-repeat right #ddd;
+border: 1px solid #ccc;
+}
