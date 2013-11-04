@@ -1271,3 +1271,16 @@ border: none;
 display:block;}*/
 
 /**/
+
+.panel-panel.panel-col-first{
+width:190px;
+border-right:5px solid #808080;
+margin-bottom: 10px;
+margin-right: 10px;
+}
+.panel-panel.panel-col{
+width:700px;
+}
+.panel-panel.panel-col-last{
+display: none;
+}
