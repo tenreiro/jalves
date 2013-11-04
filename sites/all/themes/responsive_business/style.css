@@ -1136,8 +1136,11 @@ color: #808080;
 #submit_simul_div
 {
 position: absolute;
-right:35%;
-top:50%;
+top:60%;
+right: 40%;
+}
+.ajax-progress-throbber .message, .ajax-progress-throbber .throbber{
+position: absolute;
 }
 
 #submit_simul_div .form-submit{
@@ -1220,6 +1223,7 @@ display: none;
 .oficinas .pager .pager-first.first{
 display: none;
 }
+
 /*.oficinas .pager li{
 background:none;
 display:inline-block;
