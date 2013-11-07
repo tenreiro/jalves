@@ -1,7 +1,7 @@
 <?php 
 
 function support_simulador(){
-  if($_POST['cilindrada'] && $_POST['marca'] && $_POST['modelo'] && $_POST['ano']){
+  if(isset($_POST['cilindrada']) && $_POST['marca'] && $_POST['modelo'] && $_POST['ano']){
     _support_simulador_componentes();
   }else{
     $formulario = drupal_get_form('support_simulador_formulario');
@@ -10,19 +10,16 @@ function support_simulador(){
 }
 
 function _support_simulador_componentes(){
-  $cilindrada = $_POST['cilindrada'];
-  $modelo = $_POST['modelo'];
-  $marca = $_POST['marca'];
-  $ano = $_POST['ano'];
+$display = 'panel_pane_1';
+$view = views_get_view('orcamento');
+$view->set_display($display);
+$view->execute();
+$response = $view->result;
 
-  $ano = date('Y') - $ano+1;
-  //criar o tipo de conteudo orçamento e depois filtrar os componentes da listagem de entity reference
-  
-
-  
-  
-
-  print 'ANO:'.$ano.' MARCA:'.$marca.' MODELO:'.$modelo.' CILINDRADA:'.$cilindrada;
+//percorrer o array e pegar no nid e node_title
+foreach ($response as $key => $value) {
+  print l($value->node_title,'node/'.$value->nid).'<br>';
+}
 }
 
 function support_simulador_formulario(){
@@ -192,8 +189,10 @@ function _support_simulador_select_cilindrada($form, $form_state){
   $form['cilindrada']['#options'] = array(
                 0 => ' --- '
             );
-  if($modelo){
-    $cilindrada = _support_cilindradaPorModelo($modelo);
+  $ano = $form_state['values']['ano'];
+  if($ano && $modelo){
+    $ano = date('Y') - $ano;
+    $cilindrada = _support_cilindradaPorModelo($modelo,$ano);
     $cilindrada[0] = 'Cilindrada';
     ksort($cilindrada);
     $form['cilindrada']['#options'] = $cilindrada;
@@ -223,19 +222,24 @@ function _support_marcasPorAno($ano){
   }
   return $array_return_treated;
 }
+
+
 function _support_modelosPorMarcaAno($marca,$ano){
   $array_return = $array_return_treated = array();
   $taxonomy = taxonomy_get_tree(4,$marca);
   foreach ($taxonomy as $key => $value) {
+     if($value->depth == 0){
     $value = taxonomy_term_load($value->tid);
     if(isset($value->field_ano[LANGUAGE_NONE][0]['value']) && (intval($value->field_ano[LANGUAGE_NONE][0]['value']) <= $ano)){
       $array_return[$value->tid] = $value->name;
     }
   }
+  }
   
   return $array_return;
 }
-function _support_cilindradaPorModelo($modelo){
+
+function _support_cilindradaPorModelo($modelo,$ano){
   $array_return = $array_return_treated = array();
   $taxonomy = taxonomy_get_tree(4,$modelo);
   foreach ($taxonomy as $key => $value) {
@@ -245,15 +249,21 @@ function _support_cilindradaPorModelo($modelo){
     }elseif(!isset($value->field_ano[LANGUAGE_NONE][0]['value'])){
       $array_return[$value->tid] = $value->name;
     }
-    $value = taxonomy_term_load($value->tid);
-    foreach ($value->field_modelo[LANGUAGE_NONE] as $key2 => $value2) {
-      if($value2['tid'] == $modelo)
-        $array_return[$value->tid] = $value->name;
-    }
   }
   
   return $array_return;
 }
 
+function support_filterComponentesOrcamento($data){
 
+ $cilindrada = $_POST['cilindrada'];
+ $node = node_load($data->nid);
+ $array_tids = $node->field_compativel[LANGUAGE_NONE];
+  foreach ($array_tids as $key => $value) {
+    if($value['tid'] == $cilindrada){
+      return false;
+    }
+  }
+  return true;
+}
 
