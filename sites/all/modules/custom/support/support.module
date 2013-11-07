@@ -20,20 +20,35 @@ $view->execute();
 $response = $view->result;
 $form = array();
 $form['pedir_orcamento'] = array('#type' => 'hidden','#value' => true );
-//percorrer o array e pegar no nid e node_title
-foreach ($response as $key => $value) {
-  $form['nid_'.$value->nid] = array(
-           '#type' => 'checkbox',
-           '#validated' => TRUE,
-           '#title' => $value->node_title,
-           '#default_value' => 0,
-    );
+$cilindrada = $_POST['cilindrada'];
+foreach ($response as $key2 => $value2) {
+  $compativeis = $value2->_field_data['nid']['entity']->field_compativel[LANGUAGE_NONE];
+  foreach ($compativeis as $key => $value) {
+    //filtrar pela cilindrada selecionada
+    if($value['tid'] == $cilindrada){
+      $pacotes = $value2->_field_data['nid']['entity']->field_pacote_venda[LANGUAGE_NONE];
+      $classes = array();
+      //contruir a classe pelos pacotes
+      foreach ($pacotes as $keyp => $valuep) {
+        $classes[] = 'pacote_'.$valuep['tid'];
+      }
+      $form['nid_'.$value2->nid] = array(
+               '#type' => 'checkbox',
+               '#validated' => TRUE,
+               '#attributes' => array(
+                'class' => $classes,
+              ),
+               '#title' => $value2->node_title.' - '.$value2->field_field_preco[0]['rendered']['#markup'],
+               '#default_value' => 0,
+        );
+      break;
+    }
+  }
 }
 
 $form['submit'] = array(
       '#type' => 'submit',
       '#value' => 'Gerar documento de orçamento',
-      
      );
 return $form;
 }
@@ -270,14 +285,5 @@ function _support_cilindradaPorModelo($modelo,$ano){
 
 function support_filterComponentesOrcamento($data){
 
- $cilindrada = $_POST['cilindrada'];
- $node = node_load($data->nid);
- $array_tids = $node->field_compativel[LANGUAGE_NONE];
-  foreach ($array_tids as $key => $value) {
-    if($value['tid'] == $cilindrada){
-      return false;
-    }
-  }
-  return true;
 }
 
