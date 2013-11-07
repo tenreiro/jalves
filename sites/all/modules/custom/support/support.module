@@ -2,7 +2,10 @@
 
 function support_simulador(){
   if(isset($_POST['cilindrada']) && $_POST['marca'] && $_POST['modelo'] && $_POST['ano']){
-    _support_simulador_componentes();
+    $formulario = drupal_get_form('_support_simulador_componentes');
+  }elseif(isset($_POST['pedir_orcamento'])){
+    print "APRESENTAR AQUI O ORÇAMENTO COM OS COMPONENTES ESCOLHIDOS";
+    return;
   }else{
     $formulario = drupal_get_form('support_simulador_formulario');
   }
@@ -15,11 +18,24 @@ $view = views_get_view('orcamento');
 $view->set_display($display);
 $view->execute();
 $response = $view->result;
-
+$form = array();
+$form['pedir_orcamento'] = array('#type' => 'hidden','#value' => true );
 //percorrer o array e pegar no nid e node_title
 foreach ($response as $key => $value) {
-  print l($value->node_title,'node/'.$value->nid).'<br>';
+  $form['nid_'.$value->nid] = array(
+           '#type' => 'checkbox',
+           '#validated' => TRUE,
+           '#title' => $value->node_title,
+           '#default_value' => 0,
+    );
 }
+
+$form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => 'Gerar documento de orçamento',
+      
+     );
+return $form;
 }
 
 function support_simulador_formulario(){
@@ -115,9 +131,7 @@ function support_simulador_formulario_callback($form, &$form_state) {
     $commands[] = ajax_command_invoke('#support-simulador-formulario', 'submit');
     return array('#type' => 'ajax', '#commands' => $commands);
   }
-
   $msg = '<div class="simulador_validate">Campo obrigatório</div>';
-
   if(!$form_state['values']['ano'])
     $commands[] = ajax_command_after('#select_ano', $msg);
   if(!$form_state['values']['marca'])
