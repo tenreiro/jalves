@@ -4,7 +4,8 @@ function support_simulador(){
   if(isset($_POST['cilindrada']) && $_POST['marca'] && $_POST['modelo'] && $_POST['ano']){
     $formulario = drupal_get_form('_support_simulador_componentes');
   }elseif(isset($_POST['pedir_orcamento'])){
-    print "APRESENTAR AQUI O ORÇAMENTO COM OS COMPONENTES ESCOLHIDOS";
+    
+      _support_simulador_orcamento_final();
     return;
   }else{
     $formulario = drupal_get_form('support_simulador_formulario');
@@ -12,12 +13,36 @@ function support_simulador(){
   print render($formulario);
 }
 
+function support_totalFooterOrcamento($results){
+  $total = 0;
+  foreach ($results as $key => $value) {
+    $total += $value->field_field_preco[0]['raw']['value'];
+  }
+  print '<div class="value">'.$total.'€</div>';
+
+  print '<div class="botoes_orcamento"><div class="imprimir orcamento_button">Imprimir orçamento</div><div class="enviar orcamento_button">Enviar por email</div><div class="marcar orcamento_button">Marcação em oficina</div></div>';
+}
+function _support_simulador_orcamento_final(){
+  $nids = '';
+  foreach ($_POST as $key => $value) {
+    if(strpos($key, 'idComponente_')){
+      $nids .= '+'.substr($key, 19);
+    }
+  }
+  $nids = substr($nids, 1);
+  print '<h2 class="title"> Orçamento </h2>';
+  print views_embed_view('orcamento', 'panel_pane_2',$nids);
+
+
+}
 function _support_simulador_componentes(){
 $display = 'panel_pane_1';
 $view = views_get_view('orcamento');
 $view->set_display($display);
 $view->execute();
 $response = $view->result;
+print views_embed_view('pacotes', 'panel_pane_1');
+
 $form = array();
 $form['pedir_orcamento'] = array('#type' => 'hidden','#value' => true );
 $cilindrada = $_POST['cilindrada'];
@@ -29,17 +54,21 @@ foreach ($response as $key2 => $value2) {
       $pacotes = $value2->_field_data['nid']['entity']->field_pacote_venda[LANGUAGE_NONE];
       $classes = array();
       //contruir a classe pelos pacotes
+      $package = false;
       foreach ($pacotes as $keyp => $valuep) {
+        if($valuep['tid'] == 2){
+          $package = true;
+        }
         $classes[] = 'pacote_'.$valuep['tid'];
       }
-      $form['nid_'.$value2->nid] = array(
+      $form['selectidComponente_'.$value2->nid] = array(
                '#type' => 'checkbox',
                '#validated' => TRUE,
                '#attributes' => array(
                 'class' => $classes,
               ),
                '#title' => $value2->node_title.' - '.$value2->field_field_preco[0]['rendered']['#markup'],
-               '#default_value' => 0,
+               '#default_value' => $package,
         );
       break;
     }

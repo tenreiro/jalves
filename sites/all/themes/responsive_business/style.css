@@ -1284,3 +1284,76 @@ width:700px;
 .panel-panel.panel-col-last{
 display: none;
 }
+
+
+/** SIMULADOR, escolha de componentes **/
+.view-id-pacotes.view-display-id-panel_pane_1{
+  overflow: hidden;
+  width: 520px;
+  margin: 0px auto;
+}
+.pacote_button{
+  cursor:pointer;
+  padding:20px 0px;
+  width: 120px;
+  background: #B8B4B4;
+  color: #FFF;
+  font-size: 16px;
+  margin-right: 10px;
+  border:1px solid #000;
+  text-align: center;
+  float: left;
+}
+
+.botoes_orcamento{
+  margin: 0px auto;
+  margin-top: 70px;
+  width: 870px;
+  clear: both;
+}
+.orcamento_button{
+  cursor:pointer;
+  padding:20px 0px;
+  width: 170px;
+  background: #B8B4B4;
+  color: #FFF;
+  font-size: 14px;
+  border:1px solid #000;
+  text-align: center;
+  float: left;
+  margin-right: 175px;
+  margin-bottom: 50px;
+}
+.marcar.orcamento_button{
+  margin-right: 0px;
+}
+.orcamento_button:hover,
+.pacote_button:hover,
+.pacote_button.active{
+  background: #D7181E;
+}
+.view-footer{
+  overflow: hidden;
+}
+.view-footer h3{
+  float: left;
+  margin:0px;
+  margin-top: 20px;
+}
+.view-footer .value{
+  float: left;
+  margin:0px;
+  font-size: 18px;
+  margin-left: 9px;
+  margin-top: 20px;
+}
+.view-footer .pacote_button:hover{
+  background: #B8B4B4;
+}
+.view-footer .pacote_button.active:hover{
+  background: #D7181E;
+}
+.view-footer .pacote_button{
+  margin-right: 0px;
+  cursor: inherit;
+}
