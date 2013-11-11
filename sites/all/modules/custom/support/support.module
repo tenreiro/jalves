@@ -18,7 +18,7 @@ function support_totalFooterOrcamento($results){
   foreach ($results as $key => $value) {
     $total += $value->field_field_preco[0]['raw']['value'];
   }
-  print '<div class="value">'.$total.'€</div>';
+  print '<div class="titleTotal">'.$total.'€</div>';
 
   print '<div class="botoes_orcamento"><div class="imprimir orcamento_button">Imprimir orçamento</div><div class="enviar orcamento_button">Enviar por email</div><div class="marcar orcamento_button">Marcação em oficina</div></div>';
 }
@@ -30,7 +30,7 @@ function _support_simulador_orcamento_final(){
     }
   }
   $nids = substr($nids, 1);
-  print '<h2 class="title"> Orçamento </h2>';
+  print '<h1 class="titleOrcamento"> Orçamento </h1>';
   print views_embed_view('orcamento', 'panel_pane_2',$nids);
 
 
@@ -91,8 +91,9 @@ foreach ($array_selects as $key => $value) {
 }
 
 $form['submit'] = array(
+      '#prefix' => '<div id="submit_gera_div">',
+      '#suffix' => '</div>',
       '#type' => 'submit',
-      '#value' => 'Gerar documento de orçamento',
      );
 return $form;
 }
