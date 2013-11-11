@@ -46,6 +46,7 @@ print views_embed_view('pacotes', 'panel_pane_1');
 $form = array();
 $form['pedir_orcamento'] = array('#type' => 'hidden','#value' => true );
 $cilindrada = $_POST['cilindrada'];
+$array_selects = array();
 foreach ($response as $key2 => $value2) {
   $compativeis = $value2->_field_data['nid']['entity']->field_compativel[LANGUAGE_NONE];
   foreach ($compativeis as $key => $value) {
@@ -61,7 +62,8 @@ foreach ($response as $key2 => $value2) {
         }
         $classes[] = 'pacote_'.$valuep['tid'];
       }
-      $form['selectidComponente_'.$value2->nid] = array(
+      $tid_catg = $value2->_field_data['nid']['entity']->field_categoria[LANGUAGE_NONE][0]['tid'];
+      $array_selects[$tid_catg]['selectidComponente_'.$value2->nid] = array(
                '#type' => 'checkbox',
                '#validated' => TRUE,
                '#attributes' => array(
@@ -72,6 +74,19 @@ foreach ($response as $key2 => $value2) {
         );
       break;
     }
+  }
+}
+
+foreach ($array_selects as $key => $value) {
+  $tax_term = taxonomy_term_load($key);
+  $tax_term = $tax_term->name;
+  $first = true;
+  foreach ($value as $key => $value) {
+    if($first){
+      $value['#prefix'] = '<h2 class="subTitle">'.$tax_term.'</h2>';
+    }
+    $first = false;
+    $form[$key] = $value;
   }
 }
 
